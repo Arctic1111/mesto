@@ -1,7 +1,7 @@
 .elements {
     display: grid;
     grid-template-columns: 282px 282px 282px;
-    grid-template-rows: 361px 361px 361px;
+    grid-template-rows: 361px 361px;
     grid-gap: 17px;
     margin-top: 51px;
     justify-content: center;
