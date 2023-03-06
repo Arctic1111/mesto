@@ -3,3 +3,16 @@
     flex-direction: row;
     width: 880px;
 }
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    .footer {
+        width: 66%;
+    }
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 599px) {
+    .footer {
+        width: 88%;
+    }
+}
