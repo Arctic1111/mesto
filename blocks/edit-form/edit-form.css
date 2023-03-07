@@ -1,11 +1,15 @@
 .edit-form {
     position: absolute;
-    display: flex;
+    display: none;
     flex-direction: column;
     min-width: 470px;
     left: 50%;
     transform: translate(-50%, 0);
     top: 155px;
+    z-index: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 

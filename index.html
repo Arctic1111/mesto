@@ -6,93 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Место">
     <link rel="stylesheet" href="./pages/index.css">
+    <script src="./scripts/index.js"></script>
     <title>Место</title>
 </head>
 
-<body class="page">
-    <header class="header">
-        <img src="./images/logo.svg" class="header__logo" alt="место">
-        <div class="header__line"></div>
-    </header>
-    <main>
-        <form class="edit-form">
-            <button class="close-icon"></button>
-            <div class="edit-form__form">
-                <h2 class="edit-form__title">Редактировать профиль</h2>
-                <input type="text" value="Жак-Ив Кусто" class="edit-form__field">
-                <div class="edit-form__line"></div>
-                <input type="text" value="Исследователь океана" class="edit-form__field">
-                <div class="edit-form__line"></div>
-                <button class="edit-form__submit-button">
-                    <p class="edit-form__submit">Соханить</p>
-                </button>
-            </div>
-        </form>
-
-        <section class="profile">
-            <img src="./images/image.png" class="profile__avatar" alt="Жак-Ив Кусто">
-            <div class="profile__info">
-                <div class="profile__header">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button">
-                        <img src="./images/editbutton.svg" class="profile__plus" alt="редактирование">
-                    </button>
-                </div>
-                <p class="profile__profession">Исследователь океана</p>
-            </div>
-            <button class="profile__add-button">
-                <img src="./images/Vector-2.svg" class="profile__plus" alt="плюс">
+<body>
+    <form class="edit-form">
+        <button class="edit-form__close-button"></button>
+        <div class="edit-form__form">
+            <h2 class="edit-form__title">Редактировать профиль</h2>
+            <input type="text" class="edit-form__name" value="Жак-Ив Кусто">
+            <div class="edit-form__line"></div>
+            <input type="text" class="edit-form__profession" value="Исследователь океана">
+            <div class="edit-form__line"></div>
+            <button type="submit" class="edit-form__submit-button">
+                <p class="edit-form__submit">Соханить</p>
             </button>
-        </section>
-        <section class="elements">
-            <div class="elements__element">
-                <img src="./images/elements/1.png" class="elements__image" alt="Карачаевск">
-                <div class="elements__footer">
-                    <h2 class="elements__title">Карачаевск</h2>
-                    <button class="elements__like-button"></button>
+        </div>
+    </form>
+    <div class="page">
+        <header class="header">
+            <img src="./images/logo.svg" class="header__logo" alt="место">
+            <div class="header__line"></div>
+        </header>
+        <main>
+            <section class="profile">
+                <img src="./images/image.png" class="profile__avatar" alt="Жак-Ив Кусто">
+                <div class="profile__info">
+                    <div class="profile__header">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button">
+                            <img src="./images/editbutton.svg" class="profile__plus" alt="редактирование">
+                        </button>
+                    </div>
+                    <p class="profile__profession">Исследователь океана</p>
                 </div>
-            </div>
-            <div class="elements__element">
-                <img src="./images/elements/2.png" class="elements__image" alt="Гора Эльбрус">
-                <div class="elements__footer">
-                    <h2 class="elements__title">Гора Эльбрус</h2>
-                    <button class="elements__like-button"></button>
+                <button class="profile__add-button">
+                    <img src="./images/Vector-2.svg" class="profile__plus" alt="плюс">
+                </button>
+            </section>
+            <section class="elements">
+                <div class="elements__element">
+                    <img src="./images/elements/1.png" class="elements__image" alt="Карачаевск">
+                    <div class="elements__footer">
+                        <h2 class="elements__title">Карачаевск</h2>
+                        <button class="elements__like-button"></button>
+                    </div>
                 </div>
-            </div>
-            <div class="elements__element">
-                <img src="./images/elements/3.png" class="elements__image" alt="Домбай">
-                <div class="elements__footer">
-                    <h2 class="elements__title">Домбай</h2>
-                    <button class="elements__like-button"></button>
+                <div class="elements__element">
+                    <img src="./images/elements/2.png" class="elements__image" alt="Гора Эльбрус">
+                    <div class="elements__footer">
+                        <h2 class="elements__title">Гора Эльбрус</h2>
+                        <button class="elements__like-button"></button>
+                    </div>
                 </div>
-            </div>
+                <div class="elements__element">
+                    <img src="./images/elements/3.png" class="elements__image" alt="Домбай">
+                    <div class="elements__footer">
+                        <h2 class="elements__title">Домбай</h2>
+                        <button class="elements__like-button"></button>
+                    </div>
+                </div>
 
-            <div class="elements__element">
-                <img src="./images/elements/2.png" class="elements__image" alt="Гора Эльбрус">
-                <div class="elements__footer">
-                    <h2 class="elements__title">Гора Эльбрус</h2>
-                    <button class="elements__like-button"></button>
+                <div class="elements__element">
+                    <img src="./images/elements/2.png" class="elements__image" alt="Гора Эльбрус">
+                    <div class="elements__footer">
+                        <h2 class="elements__title">Гора Эльбрус</h2>
+                        <button class="elements__like-button"></button>
+                    </div>
                 </div>
-            </div>
-            <div class="elements__element">
-                <img src="./images/elements/3.png" class="elements__image" alt="Домбай">
-                <div class="elements__footer">
-                    <h2 class="elements__title">Домбай</h2>
-                    <button class="elements__like-button"></button>
+                <div class="elements__element">
+                    <img src="./images/elements/3.png" class="elements__image" alt="Домбай">
+                    <div class="elements__footer">
+                        <h2 class="elements__title">Домбай</h2>
+                        <button class="elements__like-button"></button>
+                    </div>
                 </div>
-            </div>
-            <div class="elements__element">
-                <img src="./images/elements/1.png" class="elements__image" alt="Карачаево-Ч...">
-                <div class="elements__footer">
-                    <h2 class="elements__title">Карачаево-Ч...</h2>
-                    <button class="elements__like-button"></button>
+                <div class="elements__element">
+                    <img src="./images/elements/1.png" class="elements__image" alt="Карачаево-Ч...">
+                    <div class="elements__footer">
+                        <h2 class="elements__title">Карачаево-Ч...</h2>
+                        <button class="elements__like-button"></button>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
-    <footer class="footer">
-        <p class="footer__copyright">© 2023 Mesto Russia</p>
-    </footer>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">© 2023 Mesto Russia</p>
+        </footer>
+    </div>
 </body>
 
 
