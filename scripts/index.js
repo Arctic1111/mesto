@@ -13,12 +13,12 @@ window.addEventListener("load", function() {
 
     }
 
-    const buttonCloseElement = document.querySelector('.edit-form__close-button');
+    const buttonCloseElement = document.querySelector('.popup__close-button');
     if(buttonCloseElement){
         buttonCloseElement.addEventListener('click', closePopup);
     }
 
-    formElement = document.querySelector('.edit-form');
+    formElement = document.querySelector('.popup__container');
     formElement.addEventListener('submit', handleFormSubmit); 
 
     divElement = document.querySelector('.page');
@@ -26,12 +26,12 @@ window.addEventListener("load", function() {
 );
 
 const openPopup = function () {  
-    formElement.classList.add('edit-form_opened') ;
+    formElement.classList.add('popup_opened') ;
     divElement.classList.add('page_theme-dark');
 };
 
 const closePopup = function () {
-    formElement.classList.remove('edit-form_opened');
+    formElement.classList.remove('popup_opened');
     divElement.classList.remove('page_theme-dark');
 };
 
@@ -41,8 +41,8 @@ function handleFormSubmit (evt) {
     evt.preventDefault(); 
     formElement.addEventListener ('submit', handleFormSubmit);
 
-    const nameInput = formElement.querySelector('.edit-form__name').value;
-    const professionInput = formElement.querySelector('.edit-form__profession').value;
+    const nameInput = formElement.querySelector('.popup__name').value;
+    const professionInput = formElement.querySelector('.popup__profession').value;
 
     document.querySelector('.profile__name').textContent =nameInput;
     document.querySelector('.profile__profession').textContent = professionInput;

@@ -1,4 +1,4 @@
-.edit-form__submit {
+.popup__submit {
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -11,7 +11,7 @@
 
 
 @media screen and (min-width: 320px) and (max-width: 599px) {
-    .edit-form__submit {
+    .popup__submit {
         font-size: 14px;
         line-height: 17px;
     }

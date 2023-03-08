@@ -1,10 +1,8 @@
-.edit-form {
-    position: absolute;
+.popup__container {
+    position: fixed;
     display: none;
     flex-direction: column;
     min-width: 470px;
-    left: 50%;
-    transform: translate(-50%, 0);
     top: 155px;
     z-index: 1;
     text-overflow: ellipsis;
@@ -14,7 +12,7 @@
 
 
 @media screen and (min-width: 320px) and (max-width: 900px) {
-    .edit-form {
+    .popup__container {
         min-width: 282px;
         top: 87px;
     }
