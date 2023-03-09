@@ -1,13 +1,17 @@
 .popup__close-button {
-    background-image: url(../../../images/Close\ Icon.svg);
+    background-image: url(../../../images/Closeicon.svg);
     width: 32px;
     height: 32px;
     color: #FFFFFF;
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0);
     margin-left: auto;
     overflow: hidden;
     background-size: cover;
+    cursor: pointer;
+    border: none;
+    outline: none;
 }
+
 
 .popup__close-button:hover {
     opacity: 0.6;

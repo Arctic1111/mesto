@@ -13,7 +13,6 @@
     .profile {
         width: 282px;
         flex-direction: column;
-        align-items: center;
         margin-top: 42px;
     }
 }

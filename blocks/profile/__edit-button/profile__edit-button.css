@@ -6,9 +6,11 @@
     background-size: cover;
     width: 24px;
     height: 24px;
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0);
     box-sizing: border-box;
     border: 1px solid #FFFFFF;
+    cursor: pointer;
+    outline: none;
 }
 
 .profile__edit-button:hover {

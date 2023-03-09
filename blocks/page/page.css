@@ -1,5 +1,4 @@
 .page {
-    max-width: 1280px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -13,30 +12,4 @@
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
-}
-
-p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-h1 {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-h2 {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-button {
-    border: none;
-    outline: none;
-}
-
-body {
-    max-width: 1280px;
-    margin: 0 auto;
-    background-color: #000000;
 }
