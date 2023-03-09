@@ -79,20 +79,18 @@
             <p class="footer__copyright">© 2023 Mesto Russia</p>
         </footer>
         <div class="popup">
-            <div class="popup__container">
-                <form class="popup__body" method="get" name="popup">
-                    <button class="popup__close-button" type="reset"></button>
-                    <div class="popup__form">
-                        <h2 class="popup__title">Редактировать профиль</h2>
-                        <input type="text" class="popup__field" value="Жак-Ив Кусто" id="name" placeholder="имя"
-                            name="имя" required>
-                        <input type="text" class="popup__field" value="Исследователь океана" id="profession"
-                            placeholder="профессия" name="профессия" required>
-                        <button type="submit" class="popup__submit-button" type="submit">Сохранить</button>
-                    </div>
-                </form>
-            </div>
+            <form class="popup__container" method="get" name="popup">
+                <button class="popup__close-button" type="reset"></button>
+                <div class="popup__form">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input type="text" class="popup__field" value="Жак-Ив Кусто" id="name" placeholder="имя" name="имя"
+                        required>
+                    <input type="text" class="popup__field" value="Исследователь океана" id="profession"
+                        placeholder="профессия" name="профессия" required>
+                    <button type="submit" class="popup__submit-button" type="submit">Сохранить</button>
+            </form>
         </div>
+</div>
 
 </div>
 <script src="./scripts/index.js"></script>
