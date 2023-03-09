@@ -1,58 +1,28 @@
-let formElement, 
-    divElement,
-    nameInputValue,
-    professionInputValue;
+const formElement = document.querySelector(".popup");
+const profileHeading = document.querySelector(".profile__name");
+const profileSubHeading = document.querySelector(".profile__profession");
+const buttonEditElement = document.querySelector(".profile__edit-button");
+const buttonCloseElement = document.querySelector(".popup__close-button");
+const nameInput = formElement.querySelector("#name");
+const professionInput = formElement.querySelector("#profession");
 
-
-window.addEventListener("load", function() {
-    const buttonEditElement = document.querySelector('.profile__edit-button');
-    if(buttonEditElement){
-        buttonEditElement.addEventListener('click', openPopup);
-        heading = document.querySelector('.profile__name');
-        subheading = document.querySelector('.profile__profession');
-
-    }
-
-    const buttonCloseElement = document.querySelector('.popup__close-button');
-    if(buttonCloseElement){
-        buttonCloseElement.addEventListener('click', closePopup);
-    }
-
-    formElement = document.querySelector('.popup__container');
-    formElement.addEventListener('submit', handleFormSubmit); 
-
-    divElement = document.querySelector('.page');
-}
-);
-
-const openPopup = function () {  
-    formElement.classList.add('popup_opened') ;
-    divElement.classList.add('page_theme-dark');
+const openPopup = function () {
+  formElement.classList.add("popup_opened");
 };
 
 const closePopup = function () {
-    formElement.classList.remove('popup_opened');
-    divElement.classList.remove('page_theme-dark');
+  formElement.classList.remove("popup_opened");
 };
 
+buttonEditElement.addEventListener("click", openPopup);
+buttonCloseElement.addEventListener("click", closePopup);
+formElement.addEventListener("submit", handleFormSubmit);
 
+function handleFormSubmit(evt) {
+  evt.preventDefault();
 
-function handleFormSubmit (evt) {
-    evt.preventDefault(); 
-    formElement.addEventListener ('submit', handleFormSubmit);
+  profileHeading.textContent = nameInput.value;
+  profileSubHeading.textContent = professionInput.value;
 
-    const nameInput = formElement.querySelector('.popup__name').value;
-    const professionInput = formElement.querySelector('.popup__profession').value;
-
-    document.querySelector('.profile__name').textContent =nameInput;
-    document.querySelector('.profile__profession').textContent = professionInput;
-
-    closePopup();
-};
-
-
-
-
-
-
-
+  closePopup();
+}

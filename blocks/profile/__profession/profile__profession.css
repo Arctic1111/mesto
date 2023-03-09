@@ -1,6 +1,7 @@
 .profile__profession {
-    margin-top: 16px;
-    font-family: 'Inter', sans-serif;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'Inter', 'Arial', sans-serif;
     min-width: 294px;
     font-style: normal;
     font-weight: 400;
