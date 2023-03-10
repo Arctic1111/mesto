@@ -6,10 +6,10 @@
     line-height: 17px;
     color: #000000;
     min-width: 358px;
-    margin-top: 54px;
+    margin-top: 45px;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding-bottom: 13px;
+    padding-bottom: 10px;
 }
 
 #profession {
@@ -22,5 +22,6 @@
     .popup__field {
         min-width: 238px;
         margin-top: 75px;
+        padding-bottom: 8px;
     }
 }

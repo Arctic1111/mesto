@@ -8,10 +8,12 @@
     margin-top: 34px;
     max-width: 358px;
     margin-bottom: 0;
+    margin-right: 50px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 900px) {
     .popup__title {
+        margin-right: 2px;
         max-width: 238px;
         margin-top: 25px;
         font-size: 18px;
