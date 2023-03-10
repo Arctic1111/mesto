@@ -5,6 +5,8 @@ const buttonEditElement = document.querySelector(".profile__edit-button");
 const buttonCloseElement = document.querySelector(".popup__close-button");
 const nameInput = formElement.querySelector("#name");
 const professionInput = formElement.querySelector("#profession");
+const nameInputNewValue = document.querySelector(".profile__name");
+const professionInputNewValue = document.querySelector(".profile__profession");
 
 const openPopup = function () {
   formElement.classList.add("popup_opened");
@@ -23,6 +25,8 @@ function handleFormSubmit(evt) {
 
   profileHeading.textContent = nameInput.value;
   profileSubHeading.textContent = professionInput.value;
+  nameInput.textContent = nameInputNewValue.textContent;
+  professionInput.textContent = professionInputNewValue.textContent;
 
   closePopup();
 }
