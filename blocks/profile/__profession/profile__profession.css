@@ -2,6 +2,9 @@
     margin-top: 0;
     margin-bottom: 0;
     font-family: 'Inter', 'Arial', sans-serif;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     min-width: 294px;
     font-style: normal;
     font-weight: 400;
