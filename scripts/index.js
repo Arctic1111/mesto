@@ -9,6 +9,8 @@ const nameInputNewValue = document.querySelector(".profile__name");
 const professionInputNewValue = document.querySelector(".profile__profession");
 
 const openPopup = function () {
+  nameInput.value = nameInputNewValue.textContent;
+  professionInput.value = professionInputNewValue.textContent;
   formElement.classList.add("popup_opened");
 };
 
@@ -25,8 +27,6 @@ function handleFormSubmit(evt) {
 
   profileHeading.textContent = nameInput.value;
   profileSubHeading.textContent = professionInput.value;
-  nameInput.textContent = nameInputNewValue.textContent;
-  professionInput.textContent = professionInputNewValue.textContent;
 
   closePopup();
 }

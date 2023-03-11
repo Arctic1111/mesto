@@ -5,7 +5,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    min-width: 294px;
+    max-width: 294px;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -15,9 +15,10 @@
 
 @media screen and (min-width: 320px) and (max-width: 900px) {
     .profile__profession {
-        text-align: center;
+        max-width: 270px;
+        text-align: left;
         font-size: 14px;
         line-height: 17px;
-        margin: auto;
+        margin-left: 50px;
     }
 }
