@@ -11,8 +11,6 @@
 
 <body>
     <div class="page">
-
-
         <header class="header">
             <img src="./images/logo.svg" class="header__logo" alt="место">
         </header>
@@ -33,7 +31,25 @@
                 </button>
             </section>
             <section class="elements">
-                <div class="elements__element">
+                <template id="card">
+                    <div id="" class="elements__element">
+                        <button onclick="removeImageCard(this.id)" class="elements__delete-button" type="button">
+                            <img src="./images/delete.svg">
+                        </button>
+                        <button onclick="openImagePopup(this)" class="elements__image-button" type="button">
+                            <img src="" class="elements__image" alt="картинка">
+                        </button>
+                        <div class="elements__footer">
+                            <h2 class="elements__title"></h2>
+                            <button onclick="toggleFavoritePic(this.classList)" class="elements__like-button"
+                                type="button"></button>
+                        </div>
+                    </div>
+                </template>
+                <!-- <div class="elements__element">
+                    <button class="elements__delete-button">
+                        <img src="./images/delete.svg">
+                    </button>
                     <img src="./images/elements/1.png" class="elements__image" alt="Карачаевск">
                     <div class="elements__footer">
                         <h2 class="elements__title">Карачаевск</h2>
@@ -41,6 +57,9 @@
                     </div>
                 </div>
                 <div class="elements__element">
+                    <button class="elements__delete-button" type="button">
+                        <img src="./images/delete.svg">
+                    </button>
                     <img src="./images/elements/2.png" class="elements__image" alt="Гора Эльбрус">
                     <div class="elements__footer">
                         <h2 class="elements__title">Гора Эльбрус</h2>
@@ -48,14 +67,20 @@
                     </div>
                 </div>
                 <div class="elements__element">
+                    <button class="elements__delete-button" type="button">
+                        <img src="./images/delete.svg">
+                    </button>
                     <img src="./images/elements/3.png" class="elements__image" alt="Домбай">
                     <div class="elements__footer">
                         <h2 class="elements__title">Домбай</h2>
                         <button class="elements__like-button" type="button"></button>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="elements__element">
+                <!-- <div class="elements__element">
+                    <button class="elements__delete-button" type="button">
+                        <img src="./images/delete.svg">
+                    </button>
                     <img src="./images/elements/2.png" class="elements__image" alt="Гора Эльбрус">
                     <div class="elements__footer">
                         <h2 class="elements__title">Гора Эльбрус</h2>
@@ -63,6 +88,9 @@
                     </div>
                 </div>
                 <div class="elements__element">
+                    <button class="elements__delete-button" type="button">
+                        <img src="./images/delete.svg">
+                    </button>
                     <img src="./images/elements/3.png" class="elements__image" alt="Домбай">
                     <div class="elements__footer">
                         <h2 class="elements__title">Домбай</h2>
@@ -70,18 +98,21 @@
                     </div>
                 </div>
                 <div class="elements__element">
+                    <button class="elements__delete-button" type="button">
+                        <img src="./images/delete.svg">
+                    </button>
                     <img src="./images/elements/1.png" class="elements__image" alt="Карачаево-Ч...">
                     <div class="elements__footer">
                         <h2 class="elements__title">Карачаево-Ч...</h2>
                         <button class="elements__like-button" type="button"></button>
                     </div>
-                </div>
+                </div> -->
             </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">© 2023 Mesto Russia</p>
         </footer>
-        <div class="popup">
+        <div class="popup" id="editProfilePopup">
             <div class="popup__container">
                 <form class="popup__body" method="get" name="popup">
                     <button class="popup__close-button" type="button"></button>
@@ -93,9 +124,35 @@
                         <button type="submit" class="popup__submit-button">Сохранить</button>
                     </div>
                 </form>
+
             </div>
         </div>
-        <script src="./scripts/index.js"></script>
+        <div class="popup" id="newCardPopup">
+            <div class="popup__container">
+                <form class="popup__body" method="get" name="popup">
+                    <button id="closeNewCardPopup" class="popup__close-button" type="button"></button>
+                    <div class="popup__form">
+                        <h2 class="popup__title">Новое место</h2>
+                        <input type="text" class="popup__field" value="Новое место" id="newPlace"
+                            placeholder="Новое место" name="newPlace" required>
+                        <input type="text" class="popup__field" value="Ссылка на картинку" id="imgLink"
+                            placeholder="Ссылка на картинку" name="imgLink" required>
+                        <button type="submit" class="popup__submit-button">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="popup" id="imagePopup">
+            <div class="popup__container">
+                <form class="popup__preview" method="get" name="popup">
+                    <button id="closeImagePopup" class="popup__close-button" type="button"></button>
+                    <img src="" class="popup__image" alt="картинка">
+                    <p class="popup__image-name"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/index.js"></script>
     </div>
 </body>
 
