@@ -33,10 +33,10 @@
             <section class="elements">
                 <template id="card">
                     <div id="" class="elements__element">
-                        <button onclick="removeImageCard(this.id)" class="elements__delete-button" type="button">
+                        <button class="elements__delete-button" type="button">
                             <img src="./images/delete.svg">
                         </button>
-                        <button onclick="openImagePopup(this)" class="elements__image-button" type="button">
+                        <button class="elements__image-button" type="button">
                             <img src="." class="elements__image" alt="картинка">
                         </button>
                         <div class="elements__footer">
@@ -144,11 +144,11 @@
         </div>
         <div class="popup" id="imagePopup">
             <div class="popup__container">
-                <form class="popup__preview" method="get" name="popup">
+                <div class="popup__preview">
                     <button id="closeImagePopup" class="popup__close-button" type="button"></button>
                     <img src="." class="popup__image" alt="картинка">
                     <p class="popup__image-name"></p>
-                </form>
+                </div>
             </div>
         </div>
     </div>

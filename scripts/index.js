@@ -1,3 +1,34 @@
+const cardsBlock = document.querySelector(".elements");
+const imagePopup = document.querySelector("#imagePopup");
+const imagePopupInput = document.querySelector(".popup__image-name");
+const imageInput = document.querySelector(".elements__image");
+const titleInput = document.querySelector(".elements__title");
+const popupImage = imagePopup.querySelector(".popup__image");
+
+const openModal = document.querySelector(".elements__image-button");
+const closeImageModal = document.querySelector("#closeImagePopup");
+const deleteCard = document.querySelector(".elements__delete-button");
+
+const dialogs = {
+  profileFormElement: document.querySelector("#editProfilePopup"),
+  newCardFormElement: document.querySelector("#newCardPopup"),
+};
+
+const newCardFormElement = document.querySelector("#newCardPopup");
+const buttonOpenNewCardPopup = document.querySelector(".profile__add-button");
+const buttonCloseNewCardPopup = document.querySelector("#closeNewCardPopup");
+const cardName = dialogs.newCardFormElement.querySelector("#newPlace");
+const cardImageLink = dialogs.newCardFormElement.querySelector("#imgLink");
+
+const profileHeading = document.querySelector(".profile__name");
+const profileSubHeading = document.querySelector(".profile__profession");
+const buttonEditElement = document.querySelector(".profile__edit-button");
+const buttonCloseElement = document.querySelector(".popup__close-button");
+const nameInput = dialogs.profileFormElement.querySelector("#name");
+const professionInput = dialogs.profileFormElement.querySelector("#profession");
+const nameInputNewValue = document.querySelector(".profile__name");
+const professionInputNewValue = document.querySelector(".profile__profession");
+
 const initialCards = [
   {
     name: "Архыз",
@@ -25,53 +56,12 @@ const initialCards = [
   },
 ];
 
-const cardsBlock = document.querySelector(".elements");
-
 function initializeCardsArray() {
-  initialCards.map((card, index) => cloneAndFillTemplate(card, index));
+  initialCards.map((card) => cloneAndFillTemplate(card));
 }
 
-function cloneAndFillTemplate(card, index) {
-  const cardTemplate = document.querySelector("#card").content;
-  const cardElement = cardTemplate
-    .querySelector(".elements__element")
-    .cloneNode(true);
-
-  cardElement.id = index;
-  cardElement.querySelector(".elements__image").src = card.link;
-  cardElement.querySelector(".elements__image-button").id = index;
-  cardElement.querySelector(".elements__title").textContent = card.name;
-  cardElement.querySelector(".elements__delete-button").id = index;
-
-  cardsBlock.prepend(cardElement);
-}
-
-initializeCardsArray();
-
-const formElement = document.querySelector("#editProfilePopup");
-const profileHeading = document.querySelector(".profile__name");
-const profileSubHeading = document.querySelector(".profile__profession");
-const buttonEditElement = document.querySelector(".profile__edit-button");
-const buttonCloseElement = document.querySelector(".popup__close-button");
-const nameInput = formElement.querySelector("#name");
-const professionInput = formElement.querySelector("#profession");
-const nameInputNewValue = document.querySelector(".profile__name");
-const professionInputNewValue = document.querySelector(".profile__profession");
-
-const newCardFormElement = document.querySelector("#newCardPopup");
-const buttonOpenNewCardPopup = document.querySelector(".profile__add-button");
-const buttonCloseNewCardPopup = document.querySelector("#closeNewCardPopup");
-const cardName = newCardFormElement.querySelector("#newPlace");
-const cardImageLink = newCardFormElement.querySelector("#imgLink");
-
-const openProfilePopup = function () {
-  nameInput.value = nameInputNewValue.textContent;
-  professionInput.value = professionInputNewValue.textContent;
-  formElement.classList.add("popup_opened");
-};
-
-const closeProfilePopup = function () {
-  formElement.classList.remove("popup_opened");
+const removeImageCard = function (elem) {
+  elem.remove();
 };
 
 const toggleFavoritePic = function (data) {
@@ -82,28 +72,56 @@ const toggleFavoritePic = function (data) {
   }
 };
 
-const removeImageCard = function (id) {
-  delete initialCards[id];
-  document.getElementById(id).remove();
+const togglePicModal = function (cardContent, isOpened) {
+  if (isOpened) {
+    imagePopup.classList.add("popup_opened");
+    popupImage.src = cardContent.link;
+    popupImage.alt = cardContent.name;
+    imagePopupInput.textContent = cardContent.name;
+  } else {
+    imagePopup.classList.remove("popup_opened");
+  }
 };
 
-const openAddCardPopup = function () {
-  newCardFormElement.classList.add("popup_opened");
+const toggleModal = function (elemName, isOpened) {
+  if (isOpened) {
+    dialogs[elemName].classList.add("popup_opened");
+  } else {
+    dialogs[elemName].classList.remove("popup_opened");
+  }
 };
 
-const closeAddCardPopup = function () {
-  newCardFormElement.classList.remove("popup_opened");
-};
+function createCard(elem, cardContent) {
+  elem.querySelector(".elements__image").addEventListener("click", () => {
+    togglePicModal(cardContent, true);
+  });
 
-buttonOpenNewCardPopup.addEventListener("click", openAddCardPopup);
-buttonCloseNewCardPopup.addEventListener("click", closeAddCardPopup);
-newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
+  closeImageModal.addEventListener("click", () => {
+    togglePicModal(cardContent, false);
+  });
 
-buttonEditElement.addEventListener("click", openProfilePopup);
-buttonCloseElement.addEventListener("click", closeProfilePopup);
-formElement.addEventListener("submit", handleFormSubmit);
+  elem
+    .querySelector(".elements__delete-button")
+    .addEventListener("click", () => {
+      removeImageCard(elem);
+    });
 
-function handleFormSubmit(evt) {
+  elem.querySelector(".elements__image").src = cardContent.link;
+  elem.querySelector(".elements__title").textContent = cardContent.name;
+  elem.querySelector(".elements__title").alt = cardContent.name;
+  return elem;
+}
+
+function cloneAndFillTemplate(cardContent) {
+  const cardTemplate = document.querySelector("#card").content;
+  const cardElement = cardTemplate
+    .querySelector(".elements__element")
+    .cloneNode(true);
+
+  cardsBlock.prepend(createCard(cardElement, cardContent));
+}
+
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   profileHeading.textContent = nameInput.value;
@@ -119,34 +137,28 @@ function handleNewCardFormSubmit(evt) {
     name: cardName.value,
     link: cardImageLink.value,
   };
-  console.log(cardName, cardImageLink);
-
-  initialCards.push(newCard);
 
   cloneAndFillTemplate(newCard, initialCards.length);
-  closeAddCardPopup();
+  toggleModal("newCardFormElement", false);
 }
 
-const imagePopup = document.querySelector("#imagePopup");
-const imageInput = document.querySelector(".elements__image");
-const titleInput = document.querySelector(".elements__title");
-const imagePopupInput = document.querySelector(".popup__image-name");
-const openModal = document.querySelector(".elements__image-button");
-const closeModal = document.querySelector("#closeImagePopup");
+buttonOpenNewCardPopup.addEventListener("click", () => {
+  toggleModal("newCardFormElement", true);
+});
+buttonCloseNewCardPopup.addEventListener("click", () => {
+  toggleModal("newCardFormElement", false);
+});
 
-const openImagePopup = function (elem) {
-  imagePopup.classList.add("popup_opened");
-  const imageUrl = elem.getElementsByTagName("img")[0].src;
-  const cardElem = document.getElementById(elem.id);
-  const imageTitle = cardElem.querySelector("h2");
+dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
 
-  imagePopup.querySelector(".popup__image").src = imageUrl;
-  imagePopupInput.textContent = imageTitle.textContent;
-};
+buttonEditElement.addEventListener("click", () => {
+  toggleModal("profileFormElement", true);
+});
 
-const closeImagePopup = function () {
-  imagePopup.classList.remove("popup_opened");
-};
+buttonCloseElement.addEventListener("click", () => {
+  toggleModal("profileFormElement", false);
+});
 
-openModal.addEventListener("click", openImagePopup);
-closeModal.addEventListener("click", closeImagePopup);
+dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+initializeCardsArray();
