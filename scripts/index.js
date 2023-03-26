@@ -19,6 +19,7 @@ const buttonOpenNewCardPopup = document.querySelector(".profile__add-button");
 const buttonCloseNewCardPopup = document.querySelector("#closeNewCardPopup");
 const cardName = dialogs.newCardFormElement.querySelector("#newPlace");
 const cardImageLink = dialogs.newCardFormElement.querySelector("#imgLink");
+const likeButton = document.querySelector(".elements__like-button");
 
 const profileHeading = document.querySelector(".profile__name");
 const profileSubHeading = document.querySelector(".profile__profession");
@@ -64,11 +65,11 @@ const removeImageCard = function (elem) {
   elem.remove();
 };
 
-const toggleFavoritePic = function (data) {
-  if (data.value.includes("active")) {
-    data.value = "elements__like-button";
+const toggleFavoritePic = function (elem) {
+  if (elem.classList.value.includes("active")) {
+    elem.classList.value = "elements__like-button";
   } else {
-    data.value = "elements__like-button_active";
+    elem.classList.value = "elements__like-button_active";
   }
 };
 
@@ -99,6 +100,12 @@ function createCard(elem, cardContent) {
   closeImageModal.addEventListener("click", () => {
     togglePicModal(cardContent, false);
   });
+
+  elem
+    .querySelector(".elements__like-button")
+    .addEventListener("click", (evt) => {
+      toggleFavoritePic(evt.target);
+    });
 
   elem
     .querySelector(".elements__delete-button")
