@@ -57,21 +57,6 @@ const initialCards = [
   },
 ];
 
-function initializeCardsArray() {
-  initialCards.map((card) => cloneAndFillTemplate(card));
-}
-
-function fillProfilePopup() {
-  nameInput.value = nameInputNewValue.textContent;
-  professionInput.value = professionInputNewValue.textContent;
-}
-
-function fillImagePopup() {
-  popupImage.src = cardContent.link;
-  popupImage.alt = cardContent.name;
-  imagePopupInput.textContent = cardContent.name;
-}
-
 const removeImageCard = function (elem) {
   elem.remove();
 };
@@ -84,14 +69,6 @@ const toggleFavoritePic = function (elem) {
   }
 };
 
-const openPicModal = function () {
-  imagePopup.classList.add("popup_opened");
-};
-
-const closePicModal = function () {
-  imagePopup.classList.remove("popup_opened");
-};
-
 const openModal = function (elemName) {
   dialogs[elemName].classList.add("popup_opened");
 };
@@ -100,13 +77,26 @@ const closeModal = function (elemName) {
   dialogs[elemName].classList.remove("popup_opened");
 };
 
-function initializeListeners(elem) {
+function fillProfilePopup() {
+  nameInput.value = nameInputNewValue.textContent;
+  professionInput.value = professionInputNewValue.textContent;
+}
+
+function fillImagePopup(cardContent) {
+  popupImage.src = cardContent.link;
+  popupImage.alt = cardContent.name;
+  imagePopupInput.textContent = cardContent.name;
+}
+
+function initializeCardListeners(elem, cardContent) {
   elem.querySelector(".elements__image").addEventListener("click", () => {
     openModal("imagePopup");
     fillImagePopup(cardContent);
   });
 
-  closeImageModal.addEventListener("click", closeModal);
+  closeImageModal.addEventListener("click", () => {
+    closeModal("imagePopup");
+  });
 
   elem
     .querySelector(".elements__like-button")
@@ -121,24 +111,50 @@ function initializeListeners(elem) {
     });
 }
 
-function createCard(elem, cardContent) {
-  initializeListeners(elem, cardContent);
+function clearNewCardModal() {
+  cardName.value = "";
+  cardImageLink.value = "";
+}
 
-  elem.querySelector(".elements__image").src = cardContent.link;
-  elem.querySelector(".elements__title").textContent = cardContent.name;
-  elem.querySelector(".elements__title").alt = cardContent.name;
+function createCard(template, cardContent) {
+  const cardElement = template
+    .querySelector(".elements__element")
+    .cloneNode(true);
 
-  return elem;
+  initializeCardListeners(cardElement, cardContent);
+
+  cardElement.querySelector(".elements__image").src = cardContent.link;
+  cardElement.querySelector(".elements__title").textContent = cardContent.name;
+  cardElement.querySelector(".elements__title").alt = cardContent.name;
+
+  return cardElement;
 }
 
 function cloneAndFillTemplate(cardContent) {
   const cardTemplate = document.querySelector("#card").content;
-  const cardElement = cardTemplate
-    .querySelector(".elements__element")
-    .cloneNode(true);
 
-  cardsBlock.prepend(createCard(cardElement, cardContent));
+  cardsBlock.prepend(createCard(cardTemplate, cardContent));
 }
+
+buttonOpenNewCardPopup.addEventListener("click", () => {
+  clearNewCardModal();
+  openModal("newCardFormElement");
+});
+buttonCloseNewCardPopup.addEventListener("click", () => {
+  closeModal("newCardFormElement");
+});
+
+buttonEditElement.addEventListener("click", () => {
+  openModal("profileFormElement");
+  fillProfilePopup();
+});
+
+buttonCloseElement.addEventListener("click", () => {
+  closeModal("profileFormElement");
+});
+
+dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
+dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -157,28 +173,12 @@ function handleNewCardFormSubmit(evt) {
     link: cardImageLink.value,
   };
 
-  cloneAndFillTemplate(newCard, initialCards.length);
+  cloneAndFillTemplate(newCard);
   closeModal("newCardFormElement");
 }
 
-buttonOpenNewCardPopup.addEventListener("click", () => {
-  openModal("newCardFormElement");
-});
-buttonCloseNewCardPopup.addEventListener("click", () => {
-  closeModal("newCardFormElement");
-});
-
-dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
-
-buttonEditElement.addEventListener("click", () => {
-  openModal("profileFormElement");
-  fillProfilePopup();
-});
-
-buttonCloseElement.addEventListener("click", () => {
-  closeModal("profileFormElement");
-});
-
-dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+function initializeCardsArray() {
+  initialCards.map((card) => cloneAndFillTemplate(card));
+}
 
 initializeCardsArray();
