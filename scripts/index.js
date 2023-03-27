@@ -1,19 +1,19 @@
 const cardsBlock = document.querySelector(".elements");
-const imagePopup = document.querySelector("#imagePopup");
 const imagePopupInput = document.querySelector(".popup__image-name");
 const imageInput = document.querySelector(".elements__image");
 const titleInput = document.querySelector(".elements__title");
-const popupImage = imagePopup.querySelector(".popup__image");
 
-const openModal = document.querySelector(".elements__image-button");
+const openModalButton = document.querySelector(".elements__image-button");
 const closeImageModal = document.querySelector("#closeImagePopup");
 const deleteCard = document.querySelector(".elements__delete-button");
 
 const dialogs = {
   profileFormElement: document.querySelector("#editProfilePopup"),
   newCardFormElement: document.querySelector("#newCardPopup"),
+  imagePopup: document.querySelector("#imagePopup"),
 };
 
+const popupImage = imagePopup.querySelector(".popup__image");
 const newCardFormElement = document.querySelector("#newCardPopup");
 const buttonOpenNewCardPopup = document.querySelector(".profile__add-button");
 const buttonCloseNewCardPopup = document.querySelector("#closeNewCardPopup");
@@ -61,6 +61,17 @@ function initializeCardsArray() {
   initialCards.map((card) => cloneAndFillTemplate(card));
 }
 
+function fillProfilePopup() {
+  nameInput.value = nameInputNewValue.textContent;
+  professionInput.value = professionInputNewValue.textContent;
+}
+
+function fillImagePopup() {
+  popupImage.src = cardContent.link;
+  popupImage.alt = cardContent.name;
+  imagePopupInput.textContent = cardContent.name;
+}
+
 const removeImageCard = function (elem) {
   elem.remove();
 };
@@ -73,33 +84,29 @@ const toggleFavoritePic = function (elem) {
   }
 };
 
-const togglePicModal = function (cardContent, isOpened) {
-  if (isOpened) {
-    imagePopup.classList.add("popup_opened");
-    popupImage.src = cardContent.link;
-    popupImage.alt = cardContent.name;
-    imagePopupInput.textContent = cardContent.name;
-  } else {
-    imagePopup.classList.remove("popup_opened");
-  }
+const openPicModal = function () {
+  imagePopup.classList.add("popup_opened");
 };
 
-const toggleModal = function (elemName, isOpened) {
-  if (isOpened) {
-    dialogs[elemName].classList.add("popup_opened");
-  } else {
-    dialogs[elemName].classList.remove("popup_opened");
-  }
+const closePicModal = function () {
+  imagePopup.classList.remove("popup_opened");
 };
 
-function createCard(elem, cardContent) {
+const openModal = function (elemName) {
+  dialogs[elemName].classList.add("popup_opened");
+};
+
+const closeModal = function (elemName) {
+  dialogs[elemName].classList.remove("popup_opened");
+};
+
+function initializeListeners(elem) {
   elem.querySelector(".elements__image").addEventListener("click", () => {
-    togglePicModal(cardContent, true);
+    openModal("imagePopup");
+    fillImagePopup(cardContent);
   });
 
-  closeImageModal.addEventListener("click", () => {
-    togglePicModal(cardContent, false);
-  });
+  closeImageModal.addEventListener("click", closeModal);
 
   elem
     .querySelector(".elements__like-button")
@@ -112,10 +119,15 @@ function createCard(elem, cardContent) {
     .addEventListener("click", () => {
       removeImageCard(elem);
     });
+}
+
+function createCard(elem, cardContent) {
+  initializeListeners(elem, cardContent);
 
   elem.querySelector(".elements__image").src = cardContent.link;
   elem.querySelector(".elements__title").textContent = cardContent.name;
   elem.querySelector(".elements__title").alt = cardContent.name;
+
   return elem;
 }
 
@@ -134,7 +146,7 @@ function handleProfileFormSubmit(evt) {
   profileHeading.textContent = nameInput.value;
   profileSubHeading.textContent = professionInput.value;
 
-  closeProfilePopup();
+  closeModal("profileFormElement");
 }
 
 function handleNewCardFormSubmit(evt) {
@@ -146,24 +158,25 @@ function handleNewCardFormSubmit(evt) {
   };
 
   cloneAndFillTemplate(newCard, initialCards.length);
-  toggleModal("newCardFormElement", false);
+  closeModal("newCardFormElement");
 }
 
 buttonOpenNewCardPopup.addEventListener("click", () => {
-  toggleModal("newCardFormElement", true);
+  openModal("newCardFormElement");
 });
 buttonCloseNewCardPopup.addEventListener("click", () => {
-  toggleModal("newCardFormElement", false);
+  closeModal("newCardFormElement");
 });
 
 dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
 
 buttonEditElement.addEventListener("click", () => {
-  toggleModal("profileFormElement", true);
+  openModal("profileFormElement");
+  fillProfilePopup();
 });
 
 buttonCloseElement.addEventListener("click", () => {
-  toggleModal("profileFormElement", false);
+  closeModal("profileFormElement");
 });
 
 dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
