@@ -182,3 +182,38 @@ function initializeCardsArray() {
 }
 
 initializeCardsArray();
+
+function handleEscKeyPress(evt) {
+  if (evt.key === "Escape") {
+    closeModal("imagePopup");
+    closeModal("newCardFormElement");
+    closeModal("profileFormElement");
+  }
+}
+
+function handleOverlayClick(evt) {
+  if (evt.target.classList.contains("popup_opened")) {
+    closeModal("imagePopup");
+    closeModal("newCardFormElement");
+    closeModal("profileFormElement");
+  }
+}
+
+buttonOpenNewCardPopup.addEventListener("click", () => {
+  clearNewCardModal();
+  openModal("newCardFormElement");
+});
+buttonCloseNewCardPopup.addEventListener("click", () => {
+  closeModal("newCardFormElement");
+});
+
+buttonEditElement.addEventListener("click", () => {
+  openModal("profileFormElement");
+  fillProfilePopup();
+});
+buttonCloseElement.addEventListener("click", () => {
+  closeModal("profileFormElement");
+});
+
+document.addEventListener("click", handleOverlayClick);
+document.addEventListener("keydown", handleEscKeyPress);

@@ -113,14 +113,17 @@
         </footer>
         <div class="popup" id="editProfilePopup">
             <div class="popup__container">
-                <form class="popup__body" method="get" name="popup">
+                <form class="popup__body" method="get" name="popup" novalidate>
                     <button class="popup__close-button" type="button"></button>
                     <div class="popup__form">
                         <h2 class="popup__title">Редактировать профиль</h2>
-                        <input type="text" class="popup__field" id="name" placeholder="имя" name="name" required>
-                        <input type="text" class="popup__field" id="profession" placeholder="профессия"
-                            name="profession" required>
-                        <button type="submit" class="popup__submit-button">Сохранить</button>
+                        <input type="text" class="popup__input" id="name" placeholder="имя" name="name" minlength="2"
+                            maxlength="40" required>
+                        <span class="name-error error-message__disabled">Вы пропустили это поле.</span>
+                        <input type="text" class="popup__input" id="profession" placeholder="профессия"
+                            name="profession" minlength="2" maxlength="200" required>
+                        <span class="profession-error error-message__disabled">Вы пропустили это поле.</span>
+                        <button type="submit" class="popup__button popup__button_disabled">Сохранить</button>
                     </div>
                 </form>
 
@@ -128,15 +131,18 @@
         </div>
         <div class="popup" id="newCardPopup">
             <div class="popup__container">
-                <form class="popup__body" method="get" name="popup">
+                <form class="popup__body" method="get" name="popup" novalidate>
                     <button id="closeNewCardPopup" class="popup__close-button" type="button"></button>
                     <div class="popup__form">
                         <h2 class="popup__title">Новое место</h2>
-                        <input type="text" class="popup__field" id="newPlace" placeholder="Новое место" name="newPlace"
-                            required>
-                        <input type="url" class="popup__field" id="imgLink" placeholder="Ссылка на картинку"
+                        <input type="text" class="popup__input" id="newPlace" placeholder="Новое место" name="newPlace"
+                            minlength="2" maxlength="40" required>
+                        <span class="newPlace-error error-message__disabled">Вы пропустили это поле.</span>
+                        <input type="url" class="popup__input" id="imgLink" placeholder="Ссылка на картинку"
                             name="imgLink" required>
-                        <button type="submit" class="popup__submit-button">Сохранить</button>
+                        <span class="imgLink-error error-message__disabled">Введите адрес сайта.</span>
+
+                        <button type="submit" class="popup__button popup__button_disabled">Сохранить</button>
                     </div>
                 </form>
             </div>
@@ -152,6 +158,7 @@
         </div>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 
 
