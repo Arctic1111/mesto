@@ -1,0 +1,11 @@
+.error-message {
+    color: #FF0000;
+    min-width: 358px;
+    padding: 10px;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 21.78px;
+    transition: 0.3s;
+    opacity: 1;
+}

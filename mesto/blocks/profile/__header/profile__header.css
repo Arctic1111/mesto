@@ -1,0 +1,17 @@
+.profile__header {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+@media screen and (min-width: 320px) and (max-width: 900px) {
+    .profile__header {
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 599px) {
+    .profile__header {
+        margin-left: 32px;
+    }
+}
