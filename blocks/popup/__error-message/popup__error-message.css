@@ -1,11 +1,23 @@
-.error-message {
+.popup__error-message {
+    position: absolute;
     color: #FF0000;
     min-width: 358px;
-    padding: 10px;
     font-family: 'Inter', 'Arial', sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 21.78px;
     transition: 0.3s;
     opacity: 1;
+}
+
+#top-error {
+    margin-top: 140px;
+}
+
+#bottom-error {
+    margin-top: 200px;
+}
+
+#link-error {
+    margin-top: 210px;
 }

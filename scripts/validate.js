@@ -12,16 +12,16 @@ const setEventListeners = (formElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     const errorMessage = errorElement.textContent;
 
-    errorElement.classList.add("error-message");
+    errorElement.classList.add("popup__error-message");
     inputElement.classList.add("popup__input-error");
 
     if (inputElement.validity.valid) {
-      errorElement.classList.remove("error-message");
+      errorElement.classList.remove("popup__error-message");
       inputElement.classList.remove("popup__input-error");
-      errorElement.classList.add("error-message__disabled");
+      errorElement.classList.add("popup__error-message_disabled");
     } else {
       errorElement.textContent = errorMessage;
-      errorElement.classList.remove("error-message__disabled");
+      errorElement.classList.remove("popup__error-message_disabled");
     }
   };
 
@@ -30,8 +30,8 @@ const setEventListeners = (formElement) => {
 
     if (errorElement) {
       errorElement.textContent = "";
-      errorElement.classList.remove("error-message");
-      errorElement.classList.add("error-message__disabled");
+      errorElement.classList.remove("popup__error-message");
+      errorElement.classList.add("popup__error-message_disabled");
     }
   };
 
@@ -71,5 +71,5 @@ enableValidation({
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input-error",
-  errorClass: "error-message",
+  errorClass: "popup__error-message",
 });
