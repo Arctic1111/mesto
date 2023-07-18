@@ -10,12 +10,16 @@
     opacity: 1;
 }
 
-#top-error {
+#name-error {
     margin-top: 140px;
 }
 
-#bottom-error {
+#profession-error {
     margin-top: 200px;
+}
+
+#place-error {
+    margin-top: 140px;
 }
 
 #link-error {

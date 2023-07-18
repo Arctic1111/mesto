@@ -112,18 +112,18 @@
             <p class="footer__copyright">© 2023 Mesto Russia</p>
         </footer>
         <div class="popup" id="editProfilePopup">
-            <div class="popup__container" id="place-popup">
+            <div class="popup__container" id="profile-popup">
                 <form class="popup__body" method="get" name="popup" novalidate>
                     <button class="popup__close-button" type="button"></button>
                     <div class="popup__form">
                         <h2 class="popup__title">Редактировать профиль</h2>
                         <input type="text" class="popup__input" id="name" placeholder="имя" name="name" minlength="2"
                             maxlength="40" required>
-                        <span class="name-error popup__error-message_disabled" id="top-error">Вы пропустили это
+                        <span class="name-error popup__error-message_disabled" id="name-error">Вы пропустили это
                             поле.</span>
                         <input type="text" class="popup__input" id="profession" placeholder="профессия"
                             name="profession" minlength="2" maxlength="200" required>
-                        <span class="profession-error popup__error-message_disabled" id="bottom-error">Вы пропустили
+                        <span class="profession-error popup__error-message_disabled" id="profession-error">Вы пропустили
                             это поле.</span>
                         <button type="submit" class="popup__button popup__button_disabled">Сохранить</button>
                     </div>
@@ -139,7 +139,7 @@
                         <h2 class="popup__title">Новое место</h2>
                         <input type="text" class="popup__input" id="newPlace" placeholder="Новое место" name="newPlace"
                             minlength="2" maxlength="40" required>
-                        <span class="newPlace-error popup__error-message_disabled" id="top-error">Вы пропустили это
+                        <span class="newPlace-error popup__error-message_disabled" id="place-error">Вы пропустили это
                             поле.</span>
                         <input type="url" class="popup__input" id="imgLink" placeholder="Ссылка на картинку"
                             name="imgLink" required>
@@ -151,7 +151,7 @@
             </div>
         </div>
         <div class="popup" id="imagePopup">
-            <div class="popup__container" id="place-popup">
+            <div class="popup__container" id="img-popup">
                 <div class="popup__preview">
                     <button id="closeImagePopup" class="popup__close-button" type="button"></button>
                     <img src="." class="popup__image" alt="картинка">

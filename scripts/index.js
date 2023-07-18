@@ -193,7 +193,11 @@ function handleEscKeyPress(evt) {
 
 function handleOverlayClick(evt) {
   console.log(evt.target.id);
-  if (evt.target.id === "place-popup") {
+  if (
+    evt.target.id === "img-popup" ||
+    evt.target.id === "profile-popup" ||
+    evt.target.id === "place-popup"
+  ) {
     closeModal("imagePopup");
     closeModal("newCardFormElement");
     closeModal("profileFormElement");
