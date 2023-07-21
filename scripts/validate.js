@@ -33,7 +33,7 @@ const setEventListeners = (formElement) => {
     }
   };
 
-  const toggleInputErrorState = (formElement, inputElement) => {
+  const toggleInputError = (formElement, inputElement) => {
     if (inputElement.validity.valid) {
       hideInputError(formElement, inputElement);
     } else {
@@ -43,7 +43,7 @@ const setEventListeners = (formElement) => {
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      toggleInputErrorState(formElement, inputElement);
+      toggleInputError(formElement, inputElement);
       isValid();
     });
   });
