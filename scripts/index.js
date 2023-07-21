@@ -13,8 +13,8 @@ const dialogs = {
   imagePopup: document.querySelector("#imagePopup"),
 };
 
-const popupImage = imagePopup.querySelector(".popup__image");
-const newCardFormElement = document.querySelector("#newCardPopup");
+const popupImage = dialogs.imagePopup.querySelector(".popup__image");
+const newCardFormElement = dialogs.newCardFormElement;
 const buttonOpenNewCardPopup = document.querySelector(".profile__add-button");
 const buttonCloseNewCardPopup = document.querySelector("#closeNewCardPopup");
 const cardName = dialogs.newCardFormElement.querySelector("#newPlace");
@@ -30,33 +30,6 @@ const professionInput = dialogs.profileFormElement.querySelector("#profession");
 const nameInputNewValue = document.querySelector(".profile__name");
 const professionInputNewValue = document.querySelector(".profile__profession");
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 const removeImageCard = function (elem) {
   elem.remove();
 };
@@ -69,17 +42,35 @@ const toggleFavoritePic = function (elem) {
   }
 };
 
-const openModal = function (elemName) {
-  dialogs[elemName].classList.add("popup_opened");
+const closeModal = function (popup) {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", handleEscKeyPress);
 };
 
-const closeModal = function (elemName) {
-  dialogs[elemName].classList.remove("popup_opened");
+const openModal = function (popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", handleEscKeyPress);
+};
+
+const handleEscKeyPress = function (evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    if (openedPopup) {
+      closeModal(openedPopup);
+    }
+  }
 };
 
 function fillProfilePopup() {
   nameInput.value = nameInputNewValue.textContent;
   professionInput.value = professionInputNewValue.textContent;
+}
+
+function resetForm(formElement) {
+  const form = formElement.form;
+  if (form) {
+    form.reset();
+  }
 }
 
 function fillImagePopup(cardContent) {
@@ -90,12 +81,12 @@ function fillImagePopup(cardContent) {
 
 function initializeCardListeners(elem, cardContent) {
   elem.querySelector(".elements__image").addEventListener("click", () => {
-    openModal("imagePopup");
+    openModal(dialogs.imagePopup);
     fillImagePopup(cardContent);
   });
 
   closeImageModal.addEventListener("click", () => {
-    closeModal("imagePopup");
+    closeModal(dialogs.imagePopup);
   });
 
   elem
@@ -136,33 +127,13 @@ function cloneAndFillTemplate(cardContent) {
   cardsBlock.prepend(createCard(cardTemplate, cardContent));
 }
 
-buttonOpenNewCardPopup.addEventListener("click", () => {
-  clearNewCardModal();
-  openModal("newCardFormElement");
-});
-buttonCloseNewCardPopup.addEventListener("click", () => {
-  closeModal("newCardFormElement");
-});
-
-buttonEditElement.addEventListener("click", () => {
-  openModal("profileFormElement");
-  fillProfilePopup();
-});
-
-buttonCloseElement.addEventListener("click", () => {
-  closeModal("profileFormElement");
-});
-
-dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
-dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
-
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   profileHeading.textContent = nameInput.value;
   profileSubHeading.textContent = professionInput.value;
 
-  closeModal("profileFormElement");
+  closeModal(dialogs.profileFormElement);
 }
 
 function handleNewCardFormSubmit(evt) {
@@ -174,7 +145,9 @@ function handleNewCardFormSubmit(evt) {
   };
 
   cloneAndFillTemplate(newCard);
-  closeModal("newCardFormElement");
+  closeModal(dialogs.newCardFormElement);
+
+  resetForm(dialogs.newCardFormElement);
 }
 
 function initializeCardsArray() {
@@ -183,42 +156,42 @@ function initializeCardsArray() {
 
 initializeCardsArray();
 
-function handleEscKeyPress(evt) {
-  if (evt.key === "Escape") {
-    closeModal("imagePopup");
-    closeModal("newCardFormElement");
-    closeModal("profileFormElement");
-  }
-}
-
-function handleOverlayClick(evt) {
-  console.log(evt.target.id);
-  if (
-    evt.target.id === "img-popup" ||
-    evt.target.id === "profile-popup" ||
-    evt.target.id === "place-popup"
-  ) {
-    closeModal("imagePopup");
-    closeModal("newCardFormElement");
-    closeModal("profileFormElement");
-  }
-}
-
 buttonOpenNewCardPopup.addEventListener("click", () => {
-  clearNewCardModal();
-  openModal("newCardFormElement");
+  openModal(dialogs.newCardFormElement);
 });
+
 buttonCloseNewCardPopup.addEventListener("click", () => {
-  closeModal("newCardFormElement");
+  closeModal(dialogs.newCardFormElement);
+  resetForm(dialogs.newCardFormElement);
 });
 
 buttonEditElement.addEventListener("click", () => {
-  openModal("profileFormElement");
+  openModal(dialogs.profileFormElement);
   fillProfilePopup();
 });
+
 buttonCloseElement.addEventListener("click", () => {
-  closeModal("profileFormElement");
+  closeModal(dialogs.profileFormElement);
 });
 
+dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
+dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("popup")) {
+    closeModal(event.target);
+    resetForm(event.target.querySelector("form"));
+  }
+});
+
+function handleOverlayClick(evt) {
+  const openedPopup = document.querySelector(".popup_opened");
+
+  if (openedPopup && evt.target.classList.contains("popup__container")) {
+    closeModal(openedPopup);
+  }
+}
+
 document.addEventListener("click", handleOverlayClick);
+
 document.addEventListener("keydown", handleEscKeyPress);

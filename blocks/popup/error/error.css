@@ -1,7 +1,6 @@
 .error {
     position: absolute;
     color: #FF0000;
-    min-width: 358px;
     font-family: 'Inter', 'Arial', sans-serif;
     font-weight: 400;
     font-size: 12px;
@@ -11,17 +10,17 @@
 }
 
 #name-error {
-    margin-top: 140px;
+    top: 410px;
 }
 
 #profession-error {
-    margin-top: 200px;
+    top: 470px;
 }
 
 #place-error {
-    margin-top: 140px;
+    top: 410px
 }
 
 #link-error {
-    margin-top: 210px;
+    top: 470px
 }
