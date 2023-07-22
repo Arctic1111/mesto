@@ -102,11 +102,6 @@ function initializeCardListeners(elem, cardContent) {
     });
 }
 
-function clearNewCardModal() {
-  cardName.value = "";
-  cardImageLink.value = "";
-}
-
 function createCard(template, cardContent) {
   const cardElement = template
     .querySelector(".elements__element")
@@ -178,7 +173,7 @@ dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
 dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("popup")) {
+  if (event.target.classList.contains("popup__container")) {
     closeModal(event.target);
     resetForm(event.target.querySelector("form"));
   }
@@ -186,8 +181,7 @@ document.addEventListener("click", (event) => {
 
 function handleOverlayClick(evt) {
   const openedPopup = document.querySelector(".popup_opened");
-
-  if (openedPopup && evt.target.classList.contains("popup__container")) {
+  if (evt.target.classList.contains("popup__container")) {
     closeModal(openedPopup);
   }
 }
