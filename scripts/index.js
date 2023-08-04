@@ -3,19 +3,23 @@ import FormValidator from "./FormValidator.js";
 import { initialCards } from "./constants.js";
 
 const cardsBlock = document.querySelector(".elements");
-const imagePopupInput = document.querySelector(".popup__image-name");
-const imageInput = document.querySelector(".elements__image");
-const titleInput = document.querySelector(".elements__title");
-
-const openModalButton = document.querySelector(".elements__image-button");
-const closeImageModal = document.querySelector("#closeImagePopup");
-const deleteCard = document.querySelector(".elements__delete-button");
-
 const dialogs = {
   profileFormElement: document.querySelector("#editProfilePopup"),
   newCardFormElement: document.querySelector("#newCardPopup"),
   imagePopup: document.querySelector("#imagePopup"),
 };
+
+const imagePopupInput = dialogs.imagePopup.querySelector(".popup__image-name");
+const imageInput = dialogs.newCardFormElement.querySelector(".elements__image");
+const titleInput = dialogs.newCardFormElement.querySelector(".elements__title");
+
+const openModalButton = dialogs.newCardFormElement.querySelector(
+  ".elements__image-button"
+);
+const closeImageModal = document.querySelector("#closeImagePopup");
+const deleteCard = dialogs.newCardFormElement.querySelector(
+  ".elements__delete-button"
+);
 
 const popupImage = dialogs.imagePopup.querySelector(".popup__image");
 const newCardFormElement = dialogs.newCardFormElement;
@@ -176,20 +180,46 @@ buttonCloseElement.addEventListener("click", () => {
 dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
 dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
+// Добавляем инициализацию валидации для форм
+const profileFormValidator = new FormValidator(
+  {
+    formSelector: ".popup__body",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_disabled",
+    inputErrorClass: "popup__input-error",
+    errorClass: "error",
+  },
+  dialogs.profileFormElement
+);
+
+const newCardFormValidator = new FormValidator(
+  {
+    formSelector: ".popup__body",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_disabled",
+    inputErrorClass: "popup__input-error",
+    errorClass: "error",
+  },
+  dialogs.newCardFormElement
+);
+
+profileFormValidator.enableValidation();
+newCardFormValidator.enableValidation();
+
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("popup__container")) {
-    closeModal(event.target);
+    closeModal(event.target.closest(".popup"));
     resetForm(event.target.querySelector("form"));
   }
 });
 
-function handleOverlayClick(evt) {
-  const openedPopup = document.querySelector(".popup_opened");
-  if (evt.target.classList.contains("popup__container")) {
-    closeModal(openedPopup);
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    if (openedPopup) {
+      closeModal(openedPopup);
+    }
   }
-}
-
-document.addEventListener("click", handleOverlayClick);
-
-document.addEventListener("keydown", handleEscKeyPress);
+});
