@@ -18,14 +18,18 @@ const openModalButton = dialogs.newCardFormElement.querySelector(
   ".elements__image-button"
 );
 const closeImageModal = document.querySelector("#closeImagePopup");
+const closeProfilePopup =
+  dialogs.profileFormElement.querySelector("#closeProfilePopup");
 const deleteCard = dialogs.newCardFormElement.querySelector(
   ".elements__delete-button"
 );
 
 const buttonOpenNewCardPopup = document.querySelector(".profile__add-button");
-const buttonCloseNewCardPopup = document.querySelector("#closeNewCardPopup");
-const cardName = dialogs.newCardFormElement.querySelector("#newPlace");
-const cardImageLink = dialogs.newCardFormElement.querySelector("#imgLink");
+const buttonCloseNewCardPopup =
+  dialogs.newCardFormElement.querySelector("#closeNewCardPopup");
+const cardForm = dialogs.newCardFormElement.querySelector(".popup__body");
+const cardName = cardForm.querySelector("#newPlace");
+const cardImageLink = cardForm.querySelector("#imgLink");
 const likeButton = document.querySelector(".elements__like-button");
 
 const profileHeading = document.querySelector(".profile__name");
@@ -36,16 +40,23 @@ const professionInput = dialogs.profileFormElement.querySelector("#profession");
 const nameInputNewValue = document.querySelector(".profile__name");
 const professionInputNewValue = document.querySelector(".profile__profession");
 
+const profileFormValidator = new FormValidator(
+  {
+    formSelector: ".popup__body",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_disabled",
+    inputErrorClass: "popup__input-error",
+    errorClass: "error",
+  },
+  dialogs.profileFormElement
+);
+
+profileFormValidator.enableValidation();
+
 function fillProfilePopup() {
   nameInput.value = nameInputNewValue.textContent;
   professionInput.value = professionInputNewValue.textContent;
-}
-
-function resetForm(formElement) {
-  const form = formElement.form;
-  if (form) {
-    form.reset();
-  }
 }
 
 function fillImagePopup(cardContent) {
@@ -53,6 +64,7 @@ function fillImagePopup(cardContent) {
   popupImage.alt = cardContent.name;
   imagePopupInput.textContent = cardContent.name;
 }
+
 function openImagePopup(name, link) {
   fillImagePopup({ name, link });
   openModal(dialogs.imagePopup);
@@ -63,8 +75,8 @@ function openImagePopup(name, link) {
 }
 
 function createCard(cardContent) {
-  const card = new Card(cardContent, "#card");
-  const cardElement = card.generateCard(openImagePopup);
+  const card = new Card(cardContent, "#card", openImagePopup);
+  const cardElement = card.generateCard();
   return cardElement;
 }
 
@@ -93,7 +105,8 @@ function handleNewCardFormSubmit(evt) {
   cloneAndFillTemplate(newCard);
   closeModal(dialogs.newCardFormElement);
 
-  resetForm(dialogs.newCardFormElement);
+  cardForm.reset();
+  newCardFormValidator.resetValidation();
 }
 
 function initializeCardsArray() {
@@ -108,7 +121,7 @@ buttonOpenNewCardPopup.addEventListener("click", () => {
 
 buttonCloseNewCardPopup.addEventListener("click", () => {
   closeModal(dialogs.newCardFormElement);
-  resetForm(dialogs.newCardFormElement);
+  cardForm.reset();
 });
 
 buttonEditElement.addEventListener("click", () => {
@@ -119,18 +132,6 @@ buttonEditElement.addEventListener("click", () => {
 dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
 dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
-const profileFormValidator = new FormValidator(
-  {
-    formSelector: ".popup__body",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__button",
-    inactiveButtonClass: "popup__button_disabled",
-    inputErrorClass: "popup__input-error",
-    errorClass: "error",
-  },
-  dialogs.profileFormElement
-);
-
 const newCardFormValidator = new FormValidator(
   {
     formSelector: ".popup__body",
@@ -140,19 +141,10 @@ const newCardFormValidator = new FormValidator(
     inputErrorClass: "popup__input-error",
     errorClass: "error",
   },
-  dialogs.newCardFormElement
+  cardForm
 );
 
-profileFormValidator.enableValidation();
 newCardFormValidator.enableValidation();
-
-function toggleFavoritePic(elem) {
-  elem.classList.toggle("elements__like-button_active");
-}
-
-function removeImageCard(elem) {
-  elem.remove();
-}
 
 function closeModal(popup) {
   popup.classList.remove("popup_opened");
@@ -179,8 +171,16 @@ function closePopupOnOverlayClick(evt) {
   }
 }
 
-document.addEventListener("click", closePopupOnOverlayClick);
+dialogs.newCardFormElement
+  .querySelector(".popup__close-button")
+  .addEventListener("click", () => {
+    closeModal(dialogs.newCardFormElement);
+  });
 
-document.querySelector(".popup__close-button").addEventListener("click", () => {
-  closeModal(dialogs.profileFormElement);
-});
+dialogs.profileFormElement
+  .querySelector(".popup__close-button")
+  .addEventListener("click", () => {
+    closeModal(dialogs.profileFormElement);
+  });
+
+document.addEventListener("click", closePopupOnOverlayClick);
