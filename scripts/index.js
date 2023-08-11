@@ -53,49 +53,24 @@ function fillImagePopup(cardContent) {
   popupImage.alt = cardContent.name;
   imagePopupInput.textContent = cardContent.name;
 }
-
-function initializeCardListeners(cardElement, cardContent) {
-  cardElement
-    .querySelector(".elements__image")
-    .addEventListener("click", () => {
-      openModal(dialogs.imagePopup);
-      fillImagePopup(cardContent);
-    });
+function openImagePopup(name, link) {
+  fillImagePopup({ name, link });
+  openModal(dialogs.imagePopup);
 
   closeImageModal.addEventListener("click", () => {
     closeModal(dialogs.imagePopup);
   });
-
-  cardElement
-    .querySelector(".elements__like-button")
-    .addEventListener("click", () => {
-      toggleFavoritePic(cardElement.querySelector(".elements__like-button"));
-    });
-
-  cardElement
-    .querySelector(".elements__delete-button")
-    .addEventListener("click", () => {
-      removeImageCard(cardElement);
-    });
 }
 
-function createCard(template, cardContent) {
-  const cardElement = template
-    .querySelector(".elements__element")
-    .cloneNode(true);
-
-  initializeCardListeners(cardElement, cardContent);
-
-  cardElement.querySelector(".elements__image").src = cardContent.link;
-  cardElement.querySelector(".elements__title").textContent = cardContent.name;
-  cardElement.querySelector(".elements__title").alt = cardContent.name;
-
+function createCard(cardContent) {
+  const card = new Card(cardContent, "#card");
+  const cardElement = card.generateCard(openImagePopup);
   return cardElement;
 }
 
 function cloneAndFillTemplate(cardContent) {
   const cardTemplate = document.querySelector("#card").content;
-  cardsBlock.prepend(createCard(cardTemplate, cardContent));
+  cardsBlock.prepend(createCard(cardContent));
 }
 
 function handleProfileFormSubmit(evt) {

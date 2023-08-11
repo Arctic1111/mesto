@@ -3,7 +3,6 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-    this._closeModal = null;
   }
 
   _getTemplate() {
@@ -40,10 +39,6 @@ class Card {
     this._handleOpenPopup(this._name, this._link);
   }
 
-  setCloseModalHandler(closeModal) {
-    this._closeModal = closeModal;
-  }
-
   _setEventListeners() {
     this._element
       .querySelector(".elements__like-button")
@@ -61,7 +56,6 @@ class Card {
       .querySelector(".elements__image")
       .addEventListener("click", () => {
         this._handleImageClick();
-        this._closeModal(this._element);
       });
   }
 }
