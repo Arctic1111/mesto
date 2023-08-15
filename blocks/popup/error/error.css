@@ -7,20 +7,41 @@
     line-height: 21.78px;
     transition: 0.3s;
     opacity: 1;
+    z-index: 9999;
 }
 
 #name-error {
-    top: 410px;
+    top: 170px;
 }
 
 #profession-error {
-    top: 470px;
+    top: 230px;
 }
 
 #place-error {
-    top: 410px;
+    top: 170px;
 }
 
 #link-error {
-    top: 470px;
+    top: 230px;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 900px) {
+    #name-error {
+        top: 200px;
+    }
+
+    #profession-error {
+        top: 300px;
+    }
+
+    #place-error {
+        top: 200px;
+    }
+
+    #link-error {
+        top: 300px;
+    }
+
 }

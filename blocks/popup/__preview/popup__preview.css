@@ -6,7 +6,7 @@
 
 @media screen and (min-width: 600px) and (max-width: 900px) {
     .popup__preview {
-        min-width: 500px;
+        min-width: 475px;
     }
 }
 

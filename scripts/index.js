@@ -1,3 +1,4 @@
+import "./index.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { initialCards } from "./constants.js";
@@ -49,9 +50,12 @@ const profileFormValidator = new FormValidator(
     inputErrorClass: "popup__input-error",
     errorClass: "error",
   },
-  dialogs.profileFormElement
+  dialogs.profileFormElement.querySelector(".popup__body")
 );
 
+closeImageModal.addEventListener("click", () => {
+  closeModal(dialogs.imagePopup);
+});
 profileFormValidator.enableValidation();
 
 function fillProfilePopup() {
@@ -68,10 +72,6 @@ function fillImagePopup(cardContent) {
 function openImagePopup(name, link) {
   fillImagePopup({ name, link });
   openModal(dialogs.imagePopup);
-
-  closeImageModal.addEventListener("click", () => {
-    closeModal(dialogs.imagePopup);
-  });
 }
 
 function createCard(cardContent) {
@@ -81,8 +81,8 @@ function createCard(cardContent) {
 }
 
 function cloneAndFillTemplate(cardContent) {
-  const cardTemplate = document.querySelector("#card").content;
-  cardsBlock.prepend(createCard(cardContent));
+  const cardElement = createCard(cardContent);
+  cardsBlock.prepend(cardElement);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -129,8 +129,12 @@ buttonEditElement.addEventListener("click", () => {
   fillProfilePopup();
 });
 
-dialogs.newCardFormElement.addEventListener("submit", handleNewCardFormSubmit);
-dialogs.profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+dialogs.newCardFormElement
+  .querySelector(".popup__body")
+  .addEventListener("submit", handleNewCardFormSubmit);
+dialogs.profileFormElement
+  .querySelector(".popup__body")
+  .addEventListener("submit", handleProfileFormSubmit);
 
 const newCardFormValidator = new FormValidator(
   {
@@ -183,4 +187,6 @@ dialogs.profileFormElement
     closeModal(dialogs.profileFormElement);
   });
 
-document.addEventListener("click", closePopupOnOverlayClick);
+dialogs.newCardFormElement.addEventListener("click", closePopupOnOverlayClick);
+dialogs.profileFormElement.addEventListener("click", closePopupOnOverlayClick);
+dialogs.imagePopup.addEventListener("click", closePopupOnOverlayClick);

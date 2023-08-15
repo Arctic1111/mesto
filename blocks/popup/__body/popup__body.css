@@ -1,4 +1,5 @@
 .popup__body {
+    position: fixed;
     display: flex;
     flex-direction: column;
     min-width: 470px;
