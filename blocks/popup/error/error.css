@@ -8,6 +8,7 @@
     transition: 0.3s;
     opacity: 1;
     z-index: 9999;
+    white-space: normal;
 }
 
 #name-error {

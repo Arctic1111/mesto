@@ -2,18 +2,8 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    min-width: 470px;
     z-index: 1;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
-}
-
-
-
-@media screen and (min-width: 320px) and (max-width: 900px) {
-    .popup__body {
-        min-width: 282px;
-
-    }
+    align-items: flex-end;
 }

@@ -1,21 +1,16 @@
 .popup__image {
-
-    max-width: 816px;
+    max-width: 75vw;
     max-height: 75vh;
     background-size: cover;
+    object-fit: contain;
 }
 
 
 
 @media screen and (min-width: 600px) and (max-width: 900px) {
-    .popup__image {
-        max-width: 450px;
-    }
+    .popup__image {}
 }
 
 @media screen and (min-width: 320px) and (max-width: 599px) {
-    .popup__image {
-        max-width: 240px;
-        margin-top: 16px;
-    }
+    .popup__image {}
 }

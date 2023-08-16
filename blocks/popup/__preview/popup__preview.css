@@ -1,17 +1,5 @@
 .popup__preview {
     display: flex;
     flex-direction: column;
-    min-width: 856px;
-}
-
-@media screen and (min-width: 600px) and (max-width: 900px) {
-    .popup__preview {
-        min-width: 475px;
-    }
-}
-
-@media screen and (min-width: 320px) and (max-width: 599px) {
-    .popup__preview {
-        min-width: 240px;
-    }
+    align-items: flex-end;
 }
