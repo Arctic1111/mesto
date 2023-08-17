@@ -4,11 +4,13 @@
     font-family: 'Inter', 'Arial', sans-serif;
     font-weight: 400;
     font-size: 12px;
-    line-height: 21.78px;
     transition: 0.3s;
     opacity: 1;
-    z-index: 9999;
     white-space: normal;
+    max-width: 362px;
+    margin-left: 0;
+    line-height: 1.5;
+    left: 33px;
 }
 
 #name-error {
@@ -47,6 +49,7 @@
 
 
 @media screen and (min-width: 320px) and (max-width: 599px) {
+
     #name-error {
         top: 200px;
     }
@@ -63,4 +66,12 @@
         top: 300px;
     }
 
+}
+
+@media screen and (min-width: 320px) and (max-width: 900px) {
+    .error {
+        max-width: 242px;
+        line-height: 1.8;
+        left: 20px;
+    }
 }
